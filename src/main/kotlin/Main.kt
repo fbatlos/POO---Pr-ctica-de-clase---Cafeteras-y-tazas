@@ -1,6 +1,3 @@
-import kotlin.collections.mutableListOf
-import kotlin.collections.mutableListOf as mutableListOf1
-
 /*
 Desarrolla un programa con las siguientes clases:
 
@@ -47,46 +44,46 @@ método para realizar operaciones similares pero con diferentes conjuntos de dat
 class cafetera(var ubicacion: String){
     var capacidad = 1000
     var cantidad = 0
-    var registro = ""
     constructor(ubicacion: String , capacidad:Int) : this(ubicacion) {
         if (cantidad>capacidad){
             cantidad = capacidad
         }
     }
+
+    /** *** Crea un constructor que comprueba la cantidad , el this. es la cantidad que tiene por defecto y el normal es el que tu metes.
+     *
+     */
     fun llenar(){
         this.cantidad = this.capacidad
     }
 
-    fun servirTaza(taza: MutableList<Int>) {
+    fun servirTaza(taza: List<Taza>) {//taza:Taza:aquí llama a la taza para servirla , utilizaar metodos, programar a la realidad , tanto como sea necesario.
         val eleccion = 1..20
         var cont = 0
         cont = eleccion.random()
-        registro += ",${taza[cont]}"
+        var registro = taza[cont]
 
         if (cantidad>=100){
-            this.cantidad -= taza[cont]//seleccionamos una taza aleatoria
+            this.cantidad = //seleccionamos una taza aleatoria
         }else {
             if (cantidad <= 0) {
                 println("No hay cafe....")
             } else {
                 var falta = taza[cont]
-                falta -= this.cantidad
+
                 cantidad = 0
                 println("A la taza le falta $falta para llenarse , llena la cafetera.")
             }
         }
     }
 
-    fun mostrarRegistro(): String {
-        return registro
-    }
 
     fun vaciar(){
         this.cantidad = 0
     }
 
-    fun agregarCafe(añade:Int){
-        if (añade>200){
+    fun agregarCafe(añade:Int){ //falta el valor por defecto añade: Int = 200
+        if (añade>200){//falta compararlo conn la cantidad que tenemos  this.cantidad + añade > this.capacidad  => llenar()
             this.cantidad = this.capacidad
         }else{this.cantidad += añade}
     }
@@ -97,44 +94,20 @@ class cafetera(var ubicacion: String){
 
 
 
-        companion object {
-            class taza(var color : String){
-                init {
-                    if (color == "") {color="Blaco"}
-                }
-                var capacidadtaza = 50
-                var cantidataza = 0
-
-                fun llenar(carga:Int){
-                    if (carga<=capacidadtaza) {
-                        this.cantidataza = carga
-                    }else{cantidataza = capacidadtaza}
-                }
-            override fun toString(): String {
-                return "Taza(color = $color, capacidad = $capacidadtaza c.c., cantidad = $cantidataza c.c.)"
-            }
-        }
-    }
-}
-
-
-
 
 fun main() {
 
     //TODO: Crear 3 cafeteras en la Sala, Cocina y Oficina
-    val cafetera1 = cafetera("Sala" , 1000)
-    val cafetera2 = cafetera("Cocina" , 1000)
-    val cafetera3 = cafetera("Oficina" , 1000)
+    val cafetera1 = cafetera("Sala")//sobraba la cantidad
+    val cafetera2 = cafetera("Cocina" , 750)
+    val cafetera3 = cafetera("Oficina" , 1000)//Falta un tercer construcctor que pida cantidad tambien
+    //lo mete en una lista
+
 
     //TODO: Crear una lista de 20 tazas con capacidades aleatorias
-    var cont = 1
+    var cont = 1                            //funcion que cree las tazas y las guarde .
     val contenido = 100..150
-    val taza = mutableListOf<Int>()
-    do {
-        taza.add(contenido.random())
-        cont++
-    }while (cont!=21)
+    val taza = crearListaTazas()
 
     println("**********************************************")
     //TODO: Mostrar por pantalla el contenido de las 3 cafeteras y las tazas.
