@@ -43,6 +43,10 @@ método para realizar operaciones similares pero con diferentes conjuntos de dat
 */
 class cafetera(var ubicacion: String){
     var capacidad = 1000
+        set(value) {
+            require(value <= 2000){"Capacidad superada."}
+            field = value
+        }
     var cantidad = 0
     constructor(ubicacion: String , capacidad:Int) : this(ubicacion) {
         if (cantidad>capacidad){
@@ -77,7 +81,7 @@ class cafetera(var ubicacion: String){
         }
     }
 
-
+//3,5 yo
     fun vaciar(){
         this.cantidad = 0
     }
